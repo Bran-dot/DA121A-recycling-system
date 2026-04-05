@@ -1,36 +1,38 @@
 # DA121A Recycling Management System
 
 ## Project Description
-This system manages products and recyclable materials, calculates environmental impact, and provides recycling guidance.
+This system manages products and recyclable materials, calculates environmental impact, and provides recycling guidance. Built for the Object Oriented Design course at HKR (VT2026).
 
-## Group Members
-- To be added
+## Student
+- **Name:** [Your full name]
+- **Course:** DA121A Object Oriented Design
+- **Term:** VT 2026
+- **Work mode:** Solo (no group)
 
 ## Git Workflow
-- main branch is protected
-- All work on feature branches
-- Pull requests required for merging
+- `main` branch protected
+- Feature branches: `feature/[description]`
+- Pull requests required for all merges
 
-## Functional Requirements (Week 1)
-1. Create products (name, category, lifespan, materials)
-2. Define reusable materials (impact value, recycling category)
-3. List all products
-4. Show detailed product information
-5. Calculate environmental impact using interchangeable strategies
-6. Provide recycling guidance based on material composition
+## Week 1 Deliverables
+- [x] GitHub repository created (public)
+- [x] main branch protected
+- [x] README.md
+- [x] requirements.md
+- [x] BRANCH_STRATEGY.md
+- [x] docs/domain-sketch.puml
+- [x] Folder structure (docs, src, test)
 
-## Non-Functional Requirements (Week 1)
-1. Layered architecture (Presentation, Application, Domain)
-2. Menu-driven console application (no GUI)
-3. Strategy pattern implemented
-4. JUnit tests for domain logic only
-5. Continuous Integration (CI)
+## Functional Requirements (summary)
+1. Create products with name, category, lifespan, materials
+2. Define reusable materials with impact values
+3. List products and show details
+4. Calculate environmental impact with interchangeable strategies
+5. Provide recycling guidance
 
-## Identified Domain Concepts (Week 1)
-- Product
-- Material
-- Category
-- Lifespan
-- EnvironmentalImpact
-- RecyclingGuidance
-- ImpactCalculationStrategy
+## Non-Functional Requirements (summary)
+- Layered architecture (Presentation, Application, Domain)
+- Console application (no GUI)
+- Strategy pattern
+- JUnit tests (domain only)
+- CI with automated tests

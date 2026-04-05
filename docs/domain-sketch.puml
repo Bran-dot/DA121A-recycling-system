@@ -1,0 +1,59 @@
+@startuml
+
+' Candidate domain concepts - Week 1 sketch
+' This is NOT the final design. It will evolve.
+
+title Domain Concepts Sketch - Week 1
+
+class Product {
+  - name: String
+  - category: String
+  - lifespan: int
+  + getMaterials(): List<Material>
+  + calculateImpact(): double
+}
+
+class Material {
+  - name: String
+  - impactValue: double
+  - recyclingCategory: String
+}
+
+interface ImpactCalculationStrategy {
+  + calculate(Product): double
+}
+
+class ConcreteStrategyA {
+  + calculate(Product): double
+}
+
+class ConcreteStrategyB {
+  + calculate(Product): double
+}
+
+class RecyclingGuidance {
+  + getGuidance(Product): String
+  + handleMixedMaterials(): String
+}
+
+class ProductService {
+  + createProduct(...)
+  + listProducts()
+  + getProductDetails(id)
+}
+
+class ConsoleUI {
+  + showMenu()
+  + handleUserInput()
+  + displayOutput()
+}
+
+Product "1" -- "*" Material : composed of
+ImpactCalculationStrategy <|.. ConcreteStrategyA
+ImpactCalculationStrategy <|.. ConcreteStrategyB
+ProductService --> Product
+ProductService --> ImpactCalculationStrategy
+ConsoleUI --> ProductService
+RecyclingGuidance --> Product
+
+@enduml
