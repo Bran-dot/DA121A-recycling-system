@@ -1,0 +1,128 @@
+@startuml
+
+' Class Diagram v1 - Week 2
+' Domain Model vs Design Model
+' Responsibility-driven design
+
+title Class Diagram v1 - Recycling Management System
+
+' ============================================
+' DOMAIN MODEL (real-world concepts)
+' ============================================
+
+package "Domain Layer" {
+  
+  class Product {
+    - productId: String
+    - name: String
+    - category: String
+    - lifespan: int
+    - materials: List<Material>
+    --
+    + getName(): String
+    + getCategory(): String
+    + getLifespan(): int
+    + getMaterials(): List<Material>
+    + addMaterial(material: Material): void
+    + calculateImpact(strategy: ImpactCalculationStrategy): double
+  }
+  
+  class Material {
+    - materialId: String
+    - name: String
+    - impactValue: double
+    - recyclingCategory: String
+    - recyclingInstructions: String
+    --
+    + getName(): String
+    + getImpactValue(): double
+    + getRecyclingCategory(): String
+    + getRecyclingInstructions(): String
+  }
+  
+  enum Category {
+    ELECTRONICS
+    PLASTIC
+    GLASS
+    PAPER
+    METAL
+    TEXTILE
+    OTHER
+  }
+  
+  class ProductService {
+    - products: List<Product>
+    - materials: List<Material>
+    --
+    + createProduct(name, category, lifespan): Product
+    + listAllProducts(): List<Product>
+    + getProductDetails(productId): Product
+    + addMaterialToProduct(productId, materialId): void
+    + defineMaterial(name, impactValue, category): Material
+    + getAllMaterials(): List<Material>
+  }
+}
+
+' ============================================
+' DESIGN MODEL (Strategy Pattern)
+' ============================================
+
+package "Design Patterns" {
+  
+  interface ImpactCalculationStrategy {
+    + calculate(product: Product): double
+  }
+  
+  class SimpleImpactStrategy {
+    + calculate(product: Product): double
+  }
+  
+  class WeightedImpactStrategy {
+    + calculate(product: Product): double
+  }
+  
+  class EnvironmentalScoreStrategy {
+    + calculate(product: Product): double
+  }
+  
+  ImpactCalculationStrategy <|.. SimpleImpactStrategy
+  ImpactCalculationStrategy <|.. WeightedImpactStrategy
+  ImpactCalculationStrategy <|.. EnvironmentalScoreStrategy
+}
+
+' ============================================
+' APPLICATION LAYER (Use Cases)
+' ============================================
+
+package "Application Layer" {
+  
+  class RecyclingApp {
+    - productService: ProductService
+    - currentStrategy: ImpactCalculationStrategy
+    --
+    + run(): void
+    + handleUserInput(): void
+    + displayMenu(): void
+  }
+  
+  class RecyclingGuidance {
+    + getGuidance(product: Product): String
+    + getMixedMaterialGuidance(materials: List<Material>): String
+  }
+}
+
+' ============================================
+' RELATIONSHIPS
+' ============================================
+
+Product --> Category
+Product "1" -- "*" Material : contains
+ProductService --> Product
+ProductService --> Material
+ProductService --> ImpactCalculationStrategy
+RecyclingApp --> ProductService
+RecyclingApp --> ImpactCalculationStrategy
+RecyclingGuidance --> Product
+RecyclingGuidance --> Material
+
+@enduml
