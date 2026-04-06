@@ -1,0 +1,113 @@
+@startuml
+
+title Class Diagram v2 - After SOLID Improvements (Week 3)
+
+package "Domain Layer" {
+  
+  class Product {
+    - productId: String
+    - name: String
+    - category: Category
+    - lifespan: int
+    - materials: List<Material>
+    --
+    + Product(name, category, lifespan)
+    + getName(): String
+    + getCategory(): Category
+    + getLifespan(): int
+    + getMaterials(): List<Material>
+    + addMaterial(material: Material): void
+    + calculateImpact(strategy: ImpactCalculationStrategy): double
+    - validateLifespan(lifespan: int): boolean
+    - validateCategory(category: Category): boolean
+  }
+  
+  class Material {
+    - materialId: String
+    - name: String
+    - impactValue: double
+    - recyclingCategory: String
+    --
+    + Material(name, impactValue, recyclingCategory)
+    + getName(): String
+    + getImpactValue(): double
+    + getRecyclingCategory(): String
+    + getGuidance(): String   // ← moved from separate class
+    - validateImpactValue(value: double): boolean
+  }
+  
+  enum Category {
+    ELECTRONICS
+    PLASTIC
+    GLASS
+    PAPER
+    METAL
+    TEXTILE
+    OTHER
+  }
+}
+
+package "Application Layer (Split Services)" {
+  
+  class ProductService {
+    - products: List<Product>
+    --
+    + createProduct(name, category, lifespan): Product
+    + listAllProducts(): List<Product>
+    + getProductDetails(productId): Product
+    + addMaterialToProduct(productId, material): void
+  }
+  
+  class MaterialService {
+    - materials: List<Material>
+    --
+    + defineMaterial(name, impactValue, category): Material
+    + getAllMaterials(): List<Material>
+    + findMaterialByName(name): Material
+  }
+}
+
+package "Design Patterns" {
+  
+  interface ImpactCalculationStrategy {
+    + calculate(product: Product): double
+  }
+  
+  class SimpleImpactStrategy {
+    + calculate(product: Product): double
+  }
+  
+  class WeightedImpactStrategy {
+    + calculate(product: Product): double
+  }
+  
+  ImpactCalculationStrategy <|.. SimpleImpactStrategy
+  ImpactCalculationStrategy <|.. WeightedImpactStrategy
+}
+
+package "Presentation Layer" {
+  
+  class RecyclingApp {
+    - productService: ProductService
+    - materialService: MaterialService
+    - currentStrategy: ImpactCalculationStrategy
+    --
+    + run(): void
+    - showMenu(): void
+    - handleInput(): void
+    - displayProducts(): void
+    - displayMaterials(): void
+  }
+}
+
+' Relationships
+Product --> Category
+Product "1" -- "*" Material : contains
+ProductService --> Product
+MaterialService --> Material
+ProductService --> MaterialService
+RecyclingApp --> ProductService
+RecyclingApp --> MaterialService
+RecyclingApp --> ImpactCalculationStrategy
+
+@enduml
