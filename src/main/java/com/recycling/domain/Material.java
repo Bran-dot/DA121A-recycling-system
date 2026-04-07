@@ -1,5 +1,7 @@
 package com.recycling.domain;
 
+import java.util.UUID;
+
 public class Material {
     private String materialId;
     private String name;
@@ -8,33 +10,41 @@ public class Material {
     
     // Constructor
     public Material(String name, double impactValue, String recyclingCategory) {
-        // TODO: Week 4 - implement
+        this.materialId = UUID.randomUUID().toString();
+        this.name = name;
+        this.impactValue = impactValue;
+        this.recyclingCategory = recyclingCategory;
+        
+        // Validate
+        validateImpactValue(impactValue);
     }
     
     // Getters
+    public String getMaterialId() {
+        return materialId;
+    }
+    
     public String getName() {
-        // TODO: Week 4 - implement
-        return null;
+        return name;
     }
     
     public double getImpactValue() {
-        // TODO: Week 4 - implement
-        return 0.0;
+        return impactValue;
     }
     
     public String getRecyclingCategory() {
-        // TODO: Week 4 - implement
-        return null;
+        return recyclingCategory;
     }
     
     // Methods
     public String getGuidance() {
-        // TODO: Week 4 - implement
-        return "Recycling guidance for " + name;
+        return "Recycling guidance for " + name + ": Place in " + recyclingCategory + " bin.";
     }
     
-    private boolean validateImpactValue(double value) {
-        // TODO: Week 4 - implement
-        return value >= 0;
+    // Validation
+    private void validateImpactValue(double value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Impact value cannot be negative");
+        }
     }
 }

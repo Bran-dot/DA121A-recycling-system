@@ -1,8 +1,9 @@
 package com.recycling.domain;
 
+import com.recycling.strategies.ImpactCalculationStrategy;
 import java.util.ArrayList;
 import java.util.List;
-import com.recycling.strategies.ImpactCalculationStrategy;
+import java.util.UUID;
 
 public class Product {
     private String productId;
@@ -13,49 +14,62 @@ public class Product {
     
     // Constructor
     public Product(String name, Category category, int lifespan) {
-        // TODO: Week 4 - implement constructor
+        this.productId = UUID.randomUUID().toString();
+        this.name = name;
+        this.category = category;
+        this.lifespan = lifespan;
         this.materials = new ArrayList<>();
+        
+        // Validate
+        validateLifespan(lifespan);
+        validateCategory(category);
     }
     
     // Getters
-    public String getName() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public String getProductId() {
+        return productId;
     }
     
-    public Category getCategory() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public String getName() {
+        return name;
     }
     
-    public int getLifespan() { 
-        // TODO: Week 4 - implement
-        return 0; 
+    public Category getCategory() {
+        return category;
     }
     
-    public List<Material> getMaterials() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public int getLifespan() {
+        return lifespan;
+    }
+    
+    public List<Material> getMaterials() {
+        return new ArrayList<>(materials); // Return copy for encapsulation
     }
     
     // Methods
     public void addMaterial(Material material) {
-        // TODO: Week 4 - implement
+        if (material != null) {
+            materials.add(material);
+        }
     }
     
     public double calculateImpact(ImpactCalculationStrategy strategy) {
-        // TODO: Week 4 - implement
-        return 0.0;
+        if (strategy == null) {
+            throw new IllegalArgumentException("Strategy cannot be null");
+        }
+        return strategy.calculate(this);
     }
     
     // Validation methods
-    private boolean validateLifespan(int lifespan) {
-        // TODO: Week 4 - implement
-        return lifespan > 0;
+    private void validateLifespan(int lifespan) {
+        if (lifespan <= 0) {
+            throw new IllegalArgumentException("Lifespan must be positive");
+        }
     }
     
-    private boolean validateCategory(Category category) {
-        // TODO: Week 4 - implement
-        return category != null;
+    private void validateCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null");
+        }
     }
 }
