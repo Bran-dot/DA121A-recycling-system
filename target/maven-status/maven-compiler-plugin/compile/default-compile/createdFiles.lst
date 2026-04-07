@@ -1,0 +1,5 @@
+com\recycling\domain\Product.class
+com\recycling\strategies\SimpleImpactStrategy.class
+com\recycling\strategies\ImpactCalculationStrategy.class
+com\recycling\domain\Category.class
+com\recycling\domain\Material.class
