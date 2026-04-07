@@ -1,5 +1,9 @@
+C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\application\RecyclingService.java
 C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\domain\Category.java
 C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\domain\Material.java
 C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\domain\Product.java
+C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\Main.java
+C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\presentation\ConsoleUI.java
 C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\strategies\ImpactCalculationStrategy.java
 C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\strategies\SimpleImpactStrategy.java
+C:\Users\maxam\Desktop\DA121A-recycling-system\src\main\java\com\recycling\strategies\WeightedImpactStrategy.java

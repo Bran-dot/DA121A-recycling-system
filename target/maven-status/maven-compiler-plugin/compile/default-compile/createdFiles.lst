@@ -1,5 +1,9 @@
 com\recycling\domain\Product.class
 com\recycling\strategies\SimpleImpactStrategy.class
 com\recycling\strategies\ImpactCalculationStrategy.class
+com\recycling\application\RecyclingService.class
 com\recycling\domain\Category.class
+com\recycling\presentation\ConsoleUI.class
+com\recycling\Main.class
+com\recycling\strategies\WeightedImpactStrategy.class
 com\recycling\domain\Material.class
