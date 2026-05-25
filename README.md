@@ -4,7 +4,7 @@
 This system manages products and recyclable materials, calculates environmental impact, and provides recycling guidance. Built for the Object Oriented Design course at HKR (VT2026).
 
 ## Student
-- **Name:** [Your full name]
+- **Name:** [Maxamed Nuur]
 - **Course:** DA121A Object Oriented Design
 - **Term:** VT 2026
 - **Work mode:** Solo (no group)
