@@ -2,6 +2,8 @@ package com.recycling.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import com.recycling.strategies.ImpactCalculationStrategy;
 
 public class Product {
@@ -11,51 +13,59 @@ public class Product {
     private int lifespan;
     private List<Material> materials;
     
-    // Constructor
     public Product(String name, Category category, int lifespan) {
-        // TODO: Week 4 - implement constructor
+        this.productId = UUID.randomUUID().toString();
+        this.name = name;
+        this.category = category;
+        this.lifespan = lifespan;
         this.materials = new ArrayList<>();
+        
+        validateLifespan(lifespan);
+        validateCategory(category);
     }
     
-    // Getters
-    public String getName() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public String getProductId() {
+        return productId;
     }
     
-    public Category getCategory() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public String getName() {
+        return name;
     }
     
-    public int getLifespan() { 
-        // TODO: Week 4 - implement
-        return 0; 
+    public Category getCategory() {
+        return category;
     }
     
-    public List<Material> getMaterials() { 
-        // TODO: Week 4 - implement
-        return null; 
+    public int getLifespan() {
+        return lifespan;
     }
     
-    // Methods
+    public List<Material> getMaterials() {
+        return new ArrayList<>(materials);
+    }
+    
     public void addMaterial(Material material) {
-        // TODO: Week 4 - implement
+        if (material != null) {
+            materials.add(material);
+        }
     }
     
     public double calculateImpact(ImpactCalculationStrategy strategy) {
-        // TODO: Week 4 - implement
-        return 0.0;
+        if (strategy == null) {
+            throw new IllegalArgumentException("Strategy cannot be null");
+        }
+        return strategy.calculate(this);
     }
     
-    // Validation methods
-    private boolean validateLifespan(int lifespan) {
-        // TODO: Week 4 - implement
-        return lifespan > 0;
+    private void validateLifespan(int lifespan) {
+        if (lifespan <= 0) {
+            throw new IllegalArgumentException("Lifespan must be positive");
+        }
     }
     
-    private boolean validateCategory(Category category) {
-        // TODO: Week 4 - implement
-        return category != null;
+    private void validateCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null");
+        }
     }
 }
